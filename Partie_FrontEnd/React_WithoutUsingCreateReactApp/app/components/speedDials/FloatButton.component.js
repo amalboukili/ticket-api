@@ -8,11 +8,12 @@ import Switch from '@material-ui/core/Switch';
 import SpeedDial from '@material-ui/lab/SpeedDial';
 import SpeedDialIcon from '@material-ui/lab/SpeedDialIcon';
 import SpeedDialAction from '@material-ui/lab/SpeedDialAction';
-import FileCopyIcon from '@material-ui/icons/FileCopyOutlined';
-import SaveIcon from '@material-ui/icons/Save';
-import PrintIcon from '@material-ui/icons/Print';
-import ShareIcon from '@material-ui/icons/Share';
-import FavoriteIcon from '@material-ui/icons/Favorite';
+import EditIcon from '@material-ui/icons/Edit';
+import PersonIcon from '@material-ui/icons/Person';
+import PeopleIcon from '@material-ui/icons/People';
+// import ShareIcon from '@material-ui/icons/Share';
+// import FavoriteIcon from '@material-ui/icons/Favorite';
+import TicketItemsList from '../tikets/TicketItemsList.component';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -41,11 +42,11 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const actions = [
-  { icon: <FileCopyIcon />, name: 'Copy' },
-  { icon: <SaveIcon />, name: 'Save' },
-  { icon: <PrintIcon />, name: 'Print' },
-  { icon: <ShareIcon />, name: 'Share' },
-  { icon: <FavoriteIcon />, name: 'Like' },
+  { icon: <EditIcon />, name: 'Add ticket' },
+  { icon: <PersonIcon />, name: 'Add user' },
+  { icon: <PeopleIcon />, name: 'Users list' },
+  // { icon: <ShareIcon />, name: 'Share' },
+  // { icon: <FavoriteIcon />, name: 'Like' },
 ];
 
 export default function FloatButton() {
@@ -71,54 +72,54 @@ export default function FloatButton() {
   };
 
   return (
-    // <div className={classes.root}>
-    //   <FormControlLabel
-    //     control={
-    //       <Switch
-    //         checked={hidden}
-    //         onChange={handleHiddenChange}
-    //         value="hidden"
-    //         color="primary"
-    //       />
-    //     }
-    //     label="Hidden"
-    //   />
-    //   <FormLabel className={classes.radioGroup} component="legend">
-    //     Direction
-    //   </FormLabel>
-    //   <RadioGroup
-    //     aria-label="direction"
-    //     name="direction"
-    //     value={direction}
-    //     onChange={handleDirectionChange}
-    //     row
-    //   >
-    //     <FormControlLabel value="up" control={<Radio />} label="Up" />
-    //     <FormControlLabel value="right" control={<Radio />} label="Right" />
-    //     <FormControlLabel value="down" control={<Radio />} label="Down" />
-    //     <FormControlLabel value="left" control={<Radio />} label="Left" />
-    //   </RadioGroup>
-    <div className={classes.exampleWrapper}>
-      <SpeedDial
-        ariaLabel="SpeedDial example"
-        className={classes.speedDial}
-        hidden={hidden}
-        icon={<SpeedDialIcon />}
-        onClose={handleClose}
-        onOpen={handleOpen}
-        open={open}
-        direction={direction}
+    <div className={classes.root}>
+      <FormLabel className={classes.radioGroup} component="legend">
+        Direction
+      </FormLabel>
+      <RadioGroup
+        aria-label="direction"
+        name="direction"
+        value={direction}
+        onChange={handleDirectionChange}
+        row
       >
-        {actions.map((action) => (
-          <SpeedDialAction
-            key={action.name}
-            icon={action.icon}
-            tooltipTitle={action.name}
-            onClick={handleClose}
+        <FormControlLabel value="up" control={<Radio />} label="Right-Up" />
+        <FormControlLabel value="down" control={<Radio />} label="Left-Down" />
+      </RadioGroup>
+      <div className={classes.exampleWrapper}>
+        <TicketItemsList />
+        <SpeedDial
+          ariaLabel="Ticket Actions"
+          className={classes.speedDial}
+          hidden={hidden}
+          icon={<SpeedDialIcon />}
+          onClose={handleClose}
+          onOpen={handleOpen}
+          open={open}
+          direction={direction}
+        >
+          {actions.map((action) => (
+            <SpeedDialAction
+              key={action.name}
+              icon={action.icon}
+              tooltipTitle={action.name}
+              onClick={handleClose}
+            />
+          ))}
+        </SpeedDial>
+      </div>
+      {/* //{' '} */}
+      <FormControlLabel
+        control={
+          <Switch
+            checked={hidden}
+            onChange={handleHiddenChange}
+            value="hidden"
+            color="primary"
           />
-        ))}
-      </SpeedDial>
+        }
+        label="Hidden"
+      />
     </div>
-    // </div>
   );
 }
