@@ -6,10 +6,9 @@ function App() {
   return (
     <div>
       {/* <h1>welcome to my cool ReactJS app!</h1>
-      <p>This is simple app four managing tickets</p>
-      <div> */}
-        <Home />
-      
+      <p>This is simple app for managing tickets</p>
+      <div> */}         
+      <Home />
     </div>
   );
 }

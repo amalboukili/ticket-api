@@ -1,27 +1,32 @@
 import React from 'react';
-import styled, { ThemeProvider } from 'styled-components';
-import Container from '@material-ui/core/Container';
-import { createMuiTheme } from '@material-ui/core/styles';
-import NoSsr from '@material-ui/core/NoSsr';
+import { ThemeProvider } from 'styled-components';
 import { palette, spacing, typography } from '@material-ui/system';
+import Container from '@material-ui/core/Container';
+import { createMuiTheme, makeStyles } from '@material-ui/core/styles';
+import NoSsr from '@material-ui/core/NoSsr';
+import SearchAppBar from '../components/layout/SearchAppBar.component';
+import TicketItemsList from '../components/tikets/TicketItemsList.component';
+import FloatButton from '../components/speedDials/FloatButton.component';
+// import FloatButton from '../components/speedDials/FloatButton.component';
 
-const Box = styled.div`${palette}${spacing}${typography}`;
 const theme = createMuiTheme();
 
+const useStyles = makeStyles((theme) => ({
+  root: {
+    padding: theme.spacing(1),
+  },
+}));
+
 function Home() {
+  const classes = useStyles();
   return (
     <NoSsr>
       <ThemeProvider theme={theme}>
-        <Box
-          color="primary.main"
-          bgcolor="backgound.paper"
-          fontFamily="h6.fontFamily"
-          fontSize={{ xs: 'h6.fontSize', sm: 'h4.fontSize', md: 'h3.fontSize' }}
-          p={{ xs: 2, sm: 3, md: 4 }}
-        >
-          @material-ui/system
-        </Box>
-        <Container>Application content</Container>
+        <SearchAppBar />
+        <Container className={classes.root}>
+          <TicketItemsList />
+          <FloatButton />
+        </Container>
       </ThemeProvider>
     </NoSsr>
   );
